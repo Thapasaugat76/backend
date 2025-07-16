@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <link rel="stylesheet" href="/style.css">
-
   <meta charset="UTF-8">
   <title>MyBlogs</title>
   <style>
@@ -10,8 +9,6 @@
       margin: 0;
       font-family: Georgia, 'Times New Roman', Times, serif;
       background-color: #f3f3f3;
-      
-     
     }
 
     .card-container {
@@ -29,41 +26,59 @@
       width: 250px;
       box-shadow: 0 4px 6px rgb(0, 0, 0);
     }
+
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #e0e0e0; /* Light gray background for footer */
+    }
+
+    .logo {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: #000; /* Black color for the title */
+      font-size: 2rem; /* Adjust font size as needed */
+    }
+
+    .card img {
+      width: 100%; /* Make the image responsive */
+      height: auto; /* Maintain aspect ratio */
+      border-radius: 5px; /* Optional: round the corners of the image */
+    }
   </style>
 </head>
 <body>
   
-  
+  <div class="logo">
+    <a href="/">KaZuWa</a> <!-- Make the title clickable and redirect to home -->
+  </div>
+
   <%- include("partials/navbar") %>
 
   <div class="card-container">
     <% blogs.forEach(blog => { %>
       <div class="card">
         <% if (blog.image) { %>
-        <img
-         src="/uploads/<%= blog.image %>"
-         alt="Blog Image"
-         style =
-         "width: 100%;
-         height: auto;
-         object-fit: cover;
-         border-radius: 5px;
-         margin-bottom: 10px;"
-         />
-         <% } %>
+          <img
+            src="/uploads/<%= blog.image %>"
+            alt="Blog Image"
+          />
+        <% } %>
         <h3><%= blog.title %></h3>
-        <h5><%= blog.subtitle %></h5>
-        <p><%= blog.description.length > 100 ? blog.description.substring(0, 100) + "..." : blog.description %>
-        </p>
-        <p><strong>Auther:</strong> <%= blog.user?.Username || "Unknown" %></p>
-        
-      <a href="/single/<%= blog.id %>">Read More</a>
+        <p><%= blog.subtitle %></p>
+        <a href="/blogs/<%= blog.id %>" class="btn">Read More</a>
       </div>
-    <% }) %>
+    <% }); %>
   </div>
+
   <div class="footer">
-  Contact Us: test@gamil.com
-</div>
+    <p>© 2023 test. All rights reserved.</p>
+  </div>
 
 </body>
 </html>

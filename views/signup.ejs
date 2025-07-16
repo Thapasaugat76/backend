@@ -13,8 +13,8 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #1e1e2f, #27293d);
-      color: #ffffff;
+      background: #423f3ff5; /* Black background */
+      color: #ffffff; /* White text */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -25,14 +25,14 @@
     .head {
       font-size: 2.5rem;
       margin-bottom: 20px;
-      text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+      text-shadow: 0px 4px 10px rgba(255, 255, 255, 0.4); /* Light shadow for contrast */
     }
 
     form {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.1); /* Slightly transparent white */
       padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Dark shadow for depth */
       width: 90%;
       max-width: 400px;
       display: flex;
@@ -42,64 +42,64 @@
 
     input, textarea {
       padding: 12px;
-      background: #2c2f4a;
-      border: 1px solid #444;
+      background: #1f1f1f; /* Dark gray background for inputs */
+      border: 1px solid #444; /* Dark border */
       border-radius: 8px;
-      color: #ffffff;
+      color: #ffffff; /* White text */
       font-size: 1rem;
     }
 
     input:focus {
       outline: none;
-      border-color: #00adb5;
-      background-color: #1f2235;
+      border-color: #ffffff; /* White border on focus */
+      background-color: #333333; /* Lighter gray on focus */
     }
 
     button {
       padding: 12px;
-      background-color: #00adb5;
+      background-color: #ffffff; /* White button */
       border: none;
       border-radius: 8px;
-      color: white;
+      color: #000000; /* Black text */
       font-size: 1rem;
       cursor: pointer;
       transition: 0.3s;
     }
 
     button:hover {
-      background-color: #019ca3;
+      background-color: #e0e0e0; /* Light gray on hover */
     }
 
     a {
-      color: #ffffff;
+      color: #ffffff; /* White links */
       text-decoration: none;
     }
 
     .home-button {
       background-color: transparent;
-      border: 1px solid #00adb5;
-      color: #00adb5;
+      border: 1px solid #ffffff; /* White border */
+      color: #ffffff; /* White text */
       transition: 0.3s;
     }
 
     .home-button:hover {
-      background-color: #00adb5;
-      color: #ffffff;
+      background-color: #ffffff; /* White background on hover */
+      color: #000000; /* Black text on hover */
     }
 
     .register-button {
       background-color: transparent;
-      border: 1px solid #00adb5;
-      color: #00adb5;
+      border: 1px solid #ffffff; /* White border */
+      color: #ffffff; /* White text */
       transition: 0.3s;
     }
 
     .register-button:hover {
-      background-color: #00adb5;
-      color: #ffffff;
+      background-color: #ffffff; /* White background on hover */
+      color: #000000; /* Black text on hover */
     }
 
-        .footer {
+    .footer {
       margin-top: 20px;
       font-size: 0.9rem;
       text-align: center;
@@ -109,16 +109,14 @@
 </head>
 <body>
 
-
   <h2 class="head">Sign in</h2>
   <form action="/signup" method="POST">
     <input type="text" name="Username" placeholder="Username" required>
-    <input type="email" name="Email" placeholder="Email" required>
     <input type="password" name="Password" placeholder="Password" required>
 
     <button type="submit">Log in</button>
     <button type="button" class="home-button"><a href="/">Home</a></button>
-    <footer>Don't have an account <button type="button" class="register-button"><a href="/register">Register</a></button></footer>
+    <footer>Don't have an account? <button type="button" class="register-button"><a href="/register">Register</a></button></footer>
 
     <div class="footer">
       Contact Us: test@gmail.com
