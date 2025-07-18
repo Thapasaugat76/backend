@@ -1,42 +1,55 @@
+const { Sequelize, DataTypes } = require("sequelize");
 const dbConfig = require("../config/dbConfig");
-const {Sequelize,DataTypes}= require("sequelize");
 
-// const sequelize = new Sequelize(dbConfig.DB,dbConfig.USER,dbConfig.PASSWORD,{
-    const sequelize = new Sequelize(dbConfig.url, {
-host : dbConfig.HOST,
- dialect : dbConfig.dialect,
- pool:{
-    max: dbConfig.pool.max,
-    min: dbConfig.pool.min,
-    acquire: dbConfig.pool.acquire,
-    idle:dbConfig.pool.idle,
- },
+// Create Sequelize instance
+const sequelize = dbConfig.url
+  ? new Sequelize(dbConfig.url, {
+      host: dbConfig.HOST,
+      dialect: dbConfig.dialect,
+      pool: {
+        max: dbConfig.pool.max,
+        min: dbConfig.pool.min,
+        acquire: dbConfig.pool.acquire,
+        idle: dbConfig.pool.idle,
+      },
+    })
+  : new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
+      host: dbConfig.HOST,
+      dialect: dbConfig.dialect,
+      pool: {
+        max: dbConfig.pool.max,
+        min: dbConfig.pool.min,
+        acquire: dbConfig.pool.acquire,
+        idle: dbConfig.pool.idle,
+      },
+    });
+
+// Test connection
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("✅ Database connected");
+  })
+  .catch((err) => {
+    console.error("❌ Database connection error:", err.message);
+  });
+
+// Initialize DB object
+const db = {};
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
+
+// Import models
+db.users = require("./usersModel")(sequelize, DataTypes);
+db.blogs = require("./blogModel")(sequelize, DataTypes);
+
+// Define associations
+db.users.hasMany(db.blogs, { foreignKey: "userId" });
+db.blogs.belongsTo(db.users, { foreignKey: "userId" });
+
+// Sync models
+db.sequelize.sync({ force: false }).then(() => {
+  console.log("✅ Models synced");
 });
 
-sequelize
-.authenticate()
-.then(()=>{
-    console.log("Connected !!");
-})
-.catch((err)=>{
-    console.log("Error" + err);
-})
-
-const db = {};
-db.Sequelize=Sequelize;
-db.sequelize=sequelize;
-
-db.blogs = require("./blogModel.js")(sequelize, DataTypes);
-db.users = require("./usersModel.js")(sequelize, DataTypes);
-
-const users = require("./usersModel")(sequelize, DataTypes);
-const blogs = require("./blogModel")(sequelize,DataTypes);
-
-db.blogs.belongsTo(db.users, { foreignKey: "userId" } );
-db.users.hasMany(db.blogs, { foreignKey: "userId" } );
-
-db.sequelize.sync({force: false}).then(()=>{
-    console.log("yes re-synce done");
- 
-}); 
 module.exports = db;

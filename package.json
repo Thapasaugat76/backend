@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "nodenmon app.js"
   },
   "author": "Aayush",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "bootstrap": "^5.3.7",
+    "dotenv": "^17.2.0",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "express-session": "^1.18.1",
